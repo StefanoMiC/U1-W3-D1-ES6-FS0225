@@ -45,7 +45,12 @@ const people = [
 ];
 
 const peopleNames = people.map(obj => obj.name);
-console.log(peopleNames);
+
+const peopleNames2 = [];
+people.forEach(obj => peopleNames2.push(obj.name));
+
+console.log("PEOPLE", peopleNames);
+console.log("PEOPLE2", peopleNames2);
 
 // FILTER
 // ha lo scopo di ridurre potenzialmente una collezione, con solo elementi che passano una condizione, e ritornare un array con questi elementi.
@@ -60,3 +65,52 @@ const filteredPeople = people.filter(obj => obj.kudos >= 100);
 console.log(filteredPeople);
 const filteredPeopleLower = people.filter(obj => obj.kudos < 100);
 console.log(filteredPeopleLower);
+
+// REDUCE
+// il reduce serve sempre a ciclare un array, e ridurne i valori in UN SINGOLO VALORE DI RITORNO
+
+// array.reduce((accumulatore, elementoCorrente) => [operazione da svolgere], [valore iniziale di partenza] )
+const numArr = [14, 0, 140, 2, 55];
+console.log(numArr);
+
+const reduced = numArr.reduce((accumulator, currentValue) => {
+  console.log("ACCUMULATOR", accumulator);
+  console.log("CURRENT VALUE", currentValue);
+
+  return accumulator + currentValue;
+  // il valore dopo la virgola è il secondo argomento del reduce e rappresenta un "initialValue" ovvero il valore iniziale del nostro accumulator
+  // che quindi sarà 0 al primo giro e non più 14 (il primo elemento dell'array)
+}, 0);
+
+console.log(reduced);
+
+const reducedPeople = people.reduce((accumulator, currentValue) => {
+  console.log("ACCUMULATOR", accumulator);
+  console.log("CURRENT VALUE", currentValue.kudos);
+
+  return accumulator + currentValue.kudos;
+  // il valore dopo la virgola è il secondo argomento del reduce e rappresenta un "initialValue" ovvero il valore iniziale del nostro accumulator
+}, 0);
+
+console.log(reducedPeople);
+
+const reducedNames = peopleNames.reduce((accumulator, currentValue) => {
+  return accumulator + " " + currentValue;
+}, "");
+
+console.log(reducedNames);
+
+// const reducedNamesIntoArray = people.reduce((accumulator, currentValue) => {
+//   console.log("ACC", accumulator);
+//   console.log("CURR", currentValue);
+//   return accumulator.concat(currentValue.name);
+// }, []);
+
+// const reducedNamesIntoArray = people.reduce((accumulator, currentValue) => {
+//   console.log("ACC", accumulator);
+//   console.log("CURR", currentValue);
+//   return [...accumulator, currentValue.name];
+// }, []);
+const reducedNamesIntoArray = people.reduce((accumulator, currentValue) => [...accumulator, currentValue.name], []);
+
+console.log(reducedNamesIntoArray);
